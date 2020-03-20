@@ -2,25 +2,25 @@
   <div class="page">
     <h3>Corono Updates 🦠</h3>
     <div v-if="totalCases !== ''" class="container">
-      <h4>Total No of cases:{{ totalCases }}</h4>
-      <h4>Total No of death:{{ death }}</h4>
-      <h4>Total No of recovered:{{ recovered }}</h4>
+      <h4>Total No of cases: {{ totalCases }}</h4>
+      <h4 class="danger">Total No of death: {{ death }}</h4>
+      <h4>Total No of recovered: {{ recovered }}</h4>
     </div>
     <p v-else>Loading...</p>
     <div class="container country-data">
       <form @submit.prevent="fetchCountryData" class="container country-form">
         <input v-model="countryName" type="text" />
-        <button type="submit">Submit</button>
+        <button class="btn-danger" type="submit">Submit</button>
       </form>
       <hr />
       <div v-if="countryData !== ''" class="container">
         <div v-if="countryData !== 'Country not found'">
           <h4>Country Name: {{ countryData.country }}</h4>
           <h4>Today Cases: {{ countryData.todayCases }}</h4>
-          <h4>Today Deaths: {{ countryData.todayDeaths }}</h4>
+          <h4 class="danger">Today Deaths: {{ countryData.todayDeaths }}</h4>
           <hr />
           <h4>Total Cases: {{ countryData.cases }}</h4>
-          <h4>Total Deaths: {{ countryData.deaths }}</h4>
+          <h4 class="danger">Total Deaths: {{ countryData.deaths }}</h4>
           <h4>Active Cases: {{ countryData.active }}</h4>
           <h4>Recovered Cases: {{ countryData.recovered }}</h4>
           <h4>Critical Cases: {{ countryData.critical }}</h4>
@@ -68,9 +68,14 @@ export default {
 </script>
 
 <style>
+:root {
+  --text-color: rgba(53, 226, 53, 0.89);
+  --btn-danger-color: rgba(236, 107, 56, 0.904);
+}
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   line-height: 1.5;
 }
 .container {
@@ -85,7 +90,6 @@ export default {
   justify-content: space-around;
   align-items: baseline;
 }
-
 .country-form input {
   padding: 0.5rem;
   margin: 1rem;
@@ -96,22 +100,27 @@ export default {
   margin: 0.5rem;
   border: none;
   font-size: 1.2rem;
-  background-color: grey;
+  border-radius: 1rem;
 }
 .country-form {
-  border-top: 1px solid green;
-  border-bottom: 1px solid green;
+  border-top: 1px solid var(--text-color);
+  border-bottom: 1px solid var(--text-color);
 }
 .page {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.8);
   text-align: center;
   font-size: 2rem;
   height: 100%;
   min-height: 100vh;
-  color: green;
+  color: var(--text-color);
 }
-
 .page h3 {
   text-decoration: underline;
+}
+.btn-danger {
+  background-color: var(--btn-danger-color);
+}
+.danger {
+  color: var(--btn-danger-color);
 }
 </style>
