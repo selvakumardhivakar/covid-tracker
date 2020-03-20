@@ -1,28 +1,31 @@
 <template>
   <div class="page">
     <h3>Corono Updates 🦠</h3>
-    <div v-if="totalCases!==''" class="container">
-      <h4>Total No of cases:{{totalCases}}</h4>
-      <h4>Total No of death:{{death}}</h4>
-      <h4>Total No of recovered:{{recovered}}</h4>
+    <div v-if="totalCases !== ''" class="container">
+      <h4>Total No of cases:{{ totalCases }}</h4>
+      <h4>Total No of death:{{ death }}</h4>
+      <h4>Total No of recovered:{{ recovered }}</h4>
     </div>
     <p v-else>Loading...</p>
     <div class="container country-data">
       <form @submit.prevent="fetchCountryData" class="container country-form">
-        <input v-model="countryName" type="text">
+        <input v-model="countryName" type="text" />
         <button type="submit">Submit</button>
       </form>
-      <hr>
-      <div v-if="countryData!==''" class="container">
-        <h4>Country Name: {{countryData.country}}</h4>
-        <h4>Total Cases: {{countryData.cases}}</h4>
-        <h4>Total Deaths: {{countryData.deaths}}</h4>
-        <h4>Active Cases: {{countryData.active}}</h4>
-        <h4>Recovered Cases: {{countryData.recovered}}</h4>
-        <h4>Critical Cases: {{countryData.critical}}</h4>
-        <h3>Today</h3>
-        <h4>Today Cases: {{countryData.todayCases}}</h4>
-        <h4>Today Deaths: {{countryData.todayDeaths}}</h4>
+      <hr />
+      <div v-if="countryData !== ''" class="container">
+        <div v-if="countryData !== 'Country not found'">
+          <h4>Country Name: {{ countryData.country }}</h4>
+          <h4>Today Cases: {{ countryData.todayCases }}</h4>
+          <h4>Today Deaths: {{ countryData.todayDeaths }}</h4>
+          <hr />
+          <h4>Total Cases: {{ countryData.cases }}</h4>
+          <h4>Total Deaths: {{ countryData.deaths }}</h4>
+          <h4>Active Cases: {{ countryData.active }}</h4>
+          <h4>Recovered Cases: {{ countryData.recovered }}</h4>
+          <h4>Critical Cases: {{ countryData.critical }}</h4>
+        </div>
+        <p v-else>Country Not found</p>
       </div>
     </div>
   </div>
@@ -41,7 +44,7 @@ export default {
     };
   },
   created() {
-    service.getData().then(res => {
+    service.getData().then((res) => {
       this.totalCases = res.data.cases;
       this.death = res.data.deaths;
       this.recovered = res.data.recovered;
@@ -53,8 +56,8 @@ export default {
         console.log(this.countryName);
         service
           .getCountryData(this.countryName)
-          .then(res => res.data)
-          .then(data => {
+          .then((res) => res.data)
+          .then((data) => {
             this.countryData = data;
             console.log(this.countryData);
           });
@@ -96,12 +99,13 @@ export default {
   background-color: grey;
 }
 .country-form {
-  border-bottom: 1px solid black;
+  border-top: 1px solid green;
+  border-bottom: 1px solid green;
 }
 .page {
   background-color: rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   height: 100%;
   min-height: 100vh;
   color: green;
