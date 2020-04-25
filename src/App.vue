@@ -9,7 +9,7 @@
     </div>
     <p v-else>Loading...</p>
     <div class="container country-data">
-      <p> Search for country data </p>
+      <h4> Search for country data </h4>
       <form @submit.prevent="fetchCountryData" class="container country-form">
         <input v-model="countryName" type="text" />
         <button class="btn-danger" type="submit">Submit</button>
@@ -117,11 +117,12 @@ export default {
   min-height: 100vh;
   color: var(--text-color);
 }
-.page h3 {
+.page h3, p {
   text-decoration: underline;
 }
 .btn-danger {
   background-color: var(--btn-danger-color);
+  cursor : pointer;
 }
 .danger {
   color: var(--btn-danger-color);
