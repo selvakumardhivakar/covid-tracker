@@ -9,6 +9,7 @@
     </div>
     <p v-else>Loading...</p>
     <div class="container country-data">
+      <p> Search for country data </p>
       <form @submit.prevent="fetchCountryData" class="container country-form">
         <input v-model="countryName" type="text" />
         <button class="btn-danger" type="submit">Submit</button>
