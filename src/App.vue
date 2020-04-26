@@ -112,7 +112,7 @@ export default {
 .wrapper {
   background-color: rgba(0, 0, 0, 0.8);
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   height: 100%;
   min-height: 100vh;
   color: var(--text-color);
