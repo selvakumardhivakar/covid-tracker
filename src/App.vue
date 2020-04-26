@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="wrapper">
     <h3>Covid-19 🦠</h3>
     <div v-if="totalCases !== ''" class="container">
       <h4>Total No of cases: {{ totalCases }}</h4>
@@ -9,7 +9,7 @@
     </div>
     <p v-else>Loading...</p>
     <div class="container country-data">
-      <h4> Search for country data </h4>
+      <h4>Search for country data</h4>
       <form @submit.prevent="fetchCountryData" class="container country-form">
         <input v-model="countryName" type="text" />
         <button class="btn-danger" type="submit">Submit</button>
@@ -33,39 +33,39 @@
 </template>
 
 <script>
-import service from "./services";
+import service from './services'
 export default {
   data() {
     return {
-      countryData: "",
-      countryName: "",
-      totalCases: "",
-      death: "",
-      recovered: ""
-    };
+      countryData: '',
+      countryName: '',
+      totalCases: '',
+      death: '',
+      recovered: '',
+    }
   },
   created() {
     service.getData().then((res) => {
-      this.totalCases = res.data.cases;
-      this.death = res.data.deaths;
-      this.recovered = res.data.recovered;
-    });
+      this.totalCases = res.data.cases
+      this.death = res.data.deaths
+      this.recovered = res.data.recovered
+    })
   },
   methods: {
     fetchCountryData() {
-      if (this.countryName.trim() !== "") {
-        console.log(this.countryName);
+      if (this.countryName.trim() !== '') {
+        console.log(this.countryName)
         service
           .getCountryData(this.countryName)
           .then((res) => res.data)
           .then((data) => {
-            this.countryData = data;
-            console.log(this.countryData);
-          });
+            this.countryData = data
+            console.log(this.countryData)
+          })
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style>
@@ -109,20 +109,20 @@ export default {
   border-top: 1px solid var(--text-color);
   border-bottom: 1px solid var(--text-color);
 }
-.page {
+.wrapper {
   background-color: rgba(0, 0, 0, 0.8);
   text-align: center;
-  font-size: 2rem;
+  font-size: 1rem;
   height: 100%;
   min-height: 100vh;
   color: var(--text-color);
 }
-.page h3, p {
+.wrapper h3 {
   text-decoration: underline;
 }
 .btn-danger {
   background-color: var(--btn-danger-color);
-  cursor : pointer;
+  cursor: pointer;
 }
 .danger {
   color: var(--btn-danger-color);
